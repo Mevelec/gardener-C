@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  gardener:
+    image: gardener:latest  # Use your custom image
+    build:
+      context: .
+      dockerfile: ./projects/Gardener/docker/Dockerfile
+      args:
+        CONFIG: debug
+    volumes:
+      - ./run/gardener/workspace:/workspace      

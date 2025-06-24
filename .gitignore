@@ -371,5 +371,3 @@ bin-int/
 
 # gmake files and folder
 MakeFile
-
-project/vendor/
