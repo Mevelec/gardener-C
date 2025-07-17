@@ -1,27 +1,13 @@
 # Dockerfile
-FROM ubuntu:22.04
+FROM elros37/c_builder:0.0.2
 ARG CONFIG=release
 
 # Set environment variables to avoid prompts during installs
 ENV DEBIAN_FRONTEND=noninteractive
-
-# Update and install prerequisites
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        build-essential \
-        git \
-        wget \
-        && rm -rf /var/lib/apt/lists/*
-
-# Clone pigpio from its repository then Build and install 
-RUN git clone https://github.com/joan2937/pigpio.git /opt/pigpio
-WORKDIR /opt/pigpio
-RUN make && make install
-
+RUN find /usr -name "libpigpio.*"
 COPY ./ /project
-WORKDIR /project
 
+WORKDIR /project
 RUN set -x && \
     ./vendor/premake/premake5.work gmake $CONFIG && \
     make config=$CONFIG && \

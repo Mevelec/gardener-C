@@ -2,3 +2,6 @@
 	path = projects/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
 	branch = v2.x
+[submodule "projects/vendor/pigpio"]
+	path = projects/vendor/pigpio
+	url = https://github.com/joan2937/pigpio

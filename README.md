@@ -11,7 +11,10 @@ The SampleProject project is a template for future c++ projects
 2. get premake and put it in /vendor/premake if not present or correct version
 
 ## Build
-- run docker-compose build
+- docker-compose build
+
+## Run
+- docker-compose up
 
 ## Add submodule 
 git submodule add https://github.com/gabime/spdlog.git projects/vendor/spdlog

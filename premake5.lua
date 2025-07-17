@@ -26,10 +26,6 @@ workspace "Gardener"
 
 	filter "system:linux"
 		pic "On" -- position independent code, often needed for shared libs and Pi
-		includedirs {
-			"/usr/include/pigpio"
-		}
-		links { "pigpio" }
 
 project "Gardener"
 	kind "ConsoleApp"
@@ -50,16 +46,24 @@ project "Gardener"
 		project_dir .. "/src",
 		"./projects/LoggerAPI/src",
 		"./projects/InstrumentorAPI/src",
+		"./projects/GPIOInterface/src",
 		"./projects/vendor/spdlog/include"
+	}
+
+	libdirs {
+		"/usr/local/lib",
 	}
 
 	links { 
 		"LoggerAPI",
-		"InstrumentorAPI"
+		"InstrumentorAPI",
+		"GPIOInterface",
+		"pigpiod_if2"
 	}
 	dependson { 
 		"LoggerAPI",
-		"InstrumentorAPI"
+		"InstrumentorAPI",
+		"GPIOInterface"
 	}
 
 project "LoggerAPI"
@@ -133,11 +137,14 @@ project "GPIOInterface"
 	includedirs
 	{
 		project_dir .. "/src",
-		"./projects/GPIOInterface/src",
+		"./projects/LoggerAPI/src",
 		"./projects/vendor/spdlog/include"
 	}
-
+	libdirs {
+		"/usr/local/lib",
+	}
 	links { 
+		"pigpiod_if2",
 		"LoggerAPI",
 	}
 	dependson { 
